@@ -2,7 +2,7 @@
 
 
 
-**Aufgabe 1: Sortieren (100 Punkte)**
+**Aufgabe 1: Sortieren (100 Punkte)**\\
 Implementieren Sie die beiden Sortierverfahren Mergesort und Quicksort fur das folgende ¨
 Szenario:
 In einer Tabelle ist eine (unsortierte) Liste von Namen (Vorname Nachname) gegeben. Vorname und Nachname sind jeweils Texte aus {a, ..., z}.
