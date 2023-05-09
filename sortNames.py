@@ -3,8 +3,6 @@ import sys
 text_datei = open(sys.argv[len(sys.argv)-1])
 input_list = str(text_datei.readline())
 
-
-
 def mergesort(input_list):
     if len(input_list) == 0 or len(input_list) == 1:  # Wenn 1 oder 0 direkte rückgabe (Basisfall)
         return input_list
@@ -46,8 +44,12 @@ def quicksort(input_list):
 
 
 if sys.argv[1] == '-merge':
-    print(mergesort(input_list))
+    sorted_list = mergesort(input_list)
+    for element in sorted_list:
+        print(element)
 elif sys.argv[1] == '-quick':
-    print(quicksort(input_list))
+    sorted_list = quicksort(input_list)
+    for element in sorted_list:
+        print(element)
 
 text_datei.close()
