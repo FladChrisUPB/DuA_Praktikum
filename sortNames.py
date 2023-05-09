@@ -3,8 +3,6 @@ import sys
 text_datei = open(sys.argv[len(sys.argv)-1])
 input_list = str(text_datei.readline())
 
-
-
 def mergesort(input_list):
     if len(input_list) == 0 or len(input_list) == 1:  # Wenn 1 oder 0 direkte rückgabe (Basisfall)
         return input_list
@@ -13,13 +11,11 @@ def mergesort(input_list):
     right = mergesort(input_list[mid:])
     return(merge(left, right))  # Rückgabe der Liste an das system
 
-
 def merge(left, right):
     result = []  # hier bin ich unsicher, ist das richtig, dass man es als Liste zurück gibt? Ist ja sehr ähnlich einem Array?!
     i = 0  # linker Index
     j = 0  # rechter Index
-    while i < len(left) and j < len(right):
-        # Prüfen ob das linke Element kleiner (Vorangiger ist)
+    while i < len(left) and j < len(right):  # Prüfen ob das linke Element kleiner (Vorangiger ist)
         if left[i] <= right[j]:
             result.append(left[i])  # linkes Element wird hinzugefügt
             i += 1
@@ -29,7 +25,6 @@ def merge(left, right):
     result.extend(left[i:])  # Rest anhängen linke Teilbaum
     result.extend(right[j:])  # Rest anhängen rechter Teilbaum
     return result
-
 
 def quicksort(input_list):
     if len(input_list) <= 1:  # Basisfall
@@ -44,10 +39,13 @@ def quicksort(input_list):
             right.append(input_list)  # hinzufügen wen ndas Element größer ist
     return(quicksort(left) + [akt_index] + quicksort(right))  # rekursiver aufruf
 
-
 if sys.argv[1] == '-merge':
-    print(mergesort(input_list))
+    sorted_list = mergesort(input_list)
+    for element in sorted_list:
+        print(element)
 elif sys.argv[1] == '-quick':
-    print(quicksort(input_list))
+    sorted_list = quicksort(input_list)
+    for element in sorted_list:
+        print(element)
 
 text_datei.close()
