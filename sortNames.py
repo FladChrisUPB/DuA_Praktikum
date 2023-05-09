@@ -1,13 +1,10 @@
-'''
-Beim Aufruf bin ich etwas überfragt wie das geht. Wird wohl etwas ala
-if input == "-merge":
-    mergesort(names)
-elif input == "-quick":
-    quicksort(names)
-else:
-    leere liste oder so?
+import sys
 
-'''
+text_datei = open(sys.argv[len(sys.argv)-1])
+input_list = str(text_datei.readline())
+
+
+
 
 '''
 Wenn ich soweit alles richtig verstanden habe, hat der Algorithmus eine Laufzeit von O(n log n), da einmal O(n) mit der Schleife 
@@ -16,14 +13,13 @@ und dann einmal durch die rekursion O(log n) - Meinungen?. Schneller geht es ja 
 Ich hab mich beim Coden jetzt an den Algorithmen von den Folien orientiert. Deswegen auch zweigeteilt.
 '''
 
-
 def mergesort(input_list):
     if len(input_list) == 0 or len(input_list) == 1:  # Wenn 1 oder 0 direkte rückgabe (Basisfall)
         return input_list
     mid = len(input_list) // 2
     left = mergesort(input_list[:mid])
     right = mergesort(input_list[mid:])
-    return merge(left, right)  # Rückgabe der Liste an das system
+    return(merge(left, right))  # Rückgabe der Liste an das system
 
 def merge(left, right):
     result = []  # hier bin ich unsicher, ist das richtig, dass man es als Liste zurück gibt? Ist ja sehr ähnlich einem Array?!
@@ -51,6 +47,6 @@ def quicksort(input_list):
             left.append(input_list)  # hinzufügen wenn das Element kleiner ist
         else:
             right.append(input_list)  # hinzufügen wen ndas Element größer ist
-    return quicksort(left) + [akt_index] + quicksort(right)  # rekursiver aufruf
+    return(quicksort(left) + [akt_index] + quicksort(right))  # rekursiver aufruf
 
-
+print('Aufrufsbestätigung')
