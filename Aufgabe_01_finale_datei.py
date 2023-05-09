@@ -6,11 +6,8 @@ elif input == "-quick":
     quicksort(names)
 else:
     leere liste oder so?
+
 '''
-
-
-
-
 
 '''
 Wenn ich soweit alles richtig verstanden habe, hat der Algorithmus eine Laufzeit von O(n log n), da einmal O(n) mit der Schleife 
