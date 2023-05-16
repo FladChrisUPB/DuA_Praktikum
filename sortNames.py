@@ -1,127 +1,92 @@
-import argparse
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import sys
 
+text_datei = open(sys.argv[len(sys.argv) - 1])
+input_list = [line.strip() for line in text_datei if line != "#" and line != " "]
 
-def extract_list(pfad):
-    #List jede Zeile einer Datei ein und gibt diese als Listenelemente in einer Liste zurück
-    #Zeilen die mit # starten gelten als kommentare und werden nicht eingelesen
-    namensliste = []
-    with open(pfad) as namelist:
-        names = namelist.readlines()
-        for name in names:
-            if name[0] != "#" and name != " ":
-                i = 0     # zähler um das leerzeichen zu finden
-                for zeichen in name:
-                    if zeichen == " ":
-                        vorname = name[:i]
-                        j = i
-
-                    if zeichen == "\n":
-                        nachname = name[j:i]
-                        namensliste.append([nachname, vorname])
-                        break
-                    i += 1
-
-    return namensliste
-
+# Funktion zum vergleich von namen im format "vorname" " " "nachname" lexikographisch
+# a <= b == True
+def comp(x, y):
+    nachnamestartx = 0
+    nachnamestarty = 0
+    # Bestimme den start der nachnamen von x und y
+    for i in range(0, len(x) - 1):
+        if x[i] == " ":
+            nachnamestartx = i + 1
+    for i in range(0, len(y) - 1):
+        if y[i] == " ":
+            nachnamestarty = i + 1
+    
+    # Flag für den Fall, dass die nachnamen gleich sind
+    nachnamengleich = False 
+    
+    # Prüfe, wer nach den Nachnamen oben stehen würde
+    if x[nachnamestartx:] < y[nachnamestarty:]:
+        return True
+    elif x[nachnamestartx:] > y[nachnamestarty:]:
+        return False
+    elif x[nachnamestartx:] == y[nachnamestarty:]:
+        nachnamengleich = True # Nachnamen gleich -> prüfe Vornamen
+    
+    # Prüfe Reihenfolge nach den Vornamen
+    if nachnamengleich:
+        if x[:nachnamestartx - 2] <= y[:nachnamestarty - 2]:
+            return True
+        else:
+            return False
+        
 
 def mergesort(input_list):
-    #mergesort auf liste angewand (ohne möglichkeit eigener/normaler weights)
-    if len(input_list) == 0 or len(input_list) == 1:  # wenn 0 oder 1 direkte Rückgabe (Basisfall)
+    if len(input_list) <= 1: # Basisfall, wenn len(liste) < 2
         return input_list
-    mid = len(input_list)//2
-    left = mergesort(input_list[:mid])
-    right = mergesort(input_list[mid:])
-    return merge(left, right)   # rückgabe der Liste an das System
+    mid = len(input_list) // 2
+    left = mergesort(input_list[:mid]) # Aufteilung rechts links und sortieren
+    right = mergesort(input_list[mid:]) # Aufteilung rechts links und sortieren
+    return merge(left, right) #Rückgabe der Liste
 
 
 def merge(left, right):
-    result = []  # passt schon
-    i = 0  # linker index
-    j = 0  # rechter index
+    result = []
+    i = 0 # Index links
+    j = 0 # Index rechts
     while i < len(left) and j < len(right):
-        # Prüfen ob das linke Element kleiner (Vorrangiger ist)
-        if left[i][0] < right[j][0]:
-            result.append(left[i])
-            i += 1
-        elif left[i][0] != right[j][0]:     # Prüfen ob das rechte Element größer ist
-            result.append(right[j])
-            j += 1
-        # Prüfen ob bei gleichem Nachnamen der Vorname kleiner ist
-        elif left[i][1] < right[j][1]:
-            result.append(left[i])
+        # Pruefe, ob das linke Element kleiner ist
+        if comp(left[i], right[j]):
+            result.append(left[i]) # linkes Element in Rueckgabeliste einfuegen
             i += 1
         else:
-            result.append(right[j])
+            result.append(right[j]) # rechtes Element in Rueckgabeliste einfuegen
             j += 1
-    result.extend(left[i:])     # Rest anhängen linker Teilbaum
-    result.extend(right[j:])    # Rest anhängen rechter Teilbaum
+    result.extend(left[i:])
+    result.extend(right[j:])
     return result
 
 
-def quicksort(namelist):
-    #quicksort auf liste angewand (ohne möglichkeit eigener/normaler weights)
-    if len(namelist) <= 1:  # Basisfall
-        return namelist
-    akt_index = namelist[0]     # pivot festlegen
-    left = []
-    right = []
-    for name in namelist[1:]:
-        if name[0] < akt_index[0]:
-            left.append(name)   # hinzufügen, wenn das Element kleiner ist
-        elif name[0] != akt_index[0]:
-            right.append(name)  # hinzufügen, wenn das Element größer ist
-        elif name[1] < akt_index[1]:
-            # hinzufügen, wenn Nachnamen gleich und Element kleiner
-            left.append(name)
-        else:
-            # hinzufügen, wenn Nachnamen gleich und Element größer
-            right.append(name)
-    # rekursiver aufruf
-    return quicksort(left) + [akt_index] + quicksort(right)
+def partition(input_list, unten, oben):
+    pivot = input_list[oben] # rechteste element als pivot
+    i = unten - 1 # Teilungsanzeiger
+    for j in range(unten, oben):
+        if comp(input_list[j], pivot):
+            i += 1 # Zeiger um einen anheben
+            (input_list[i], input_list[j]) = (input_list[j], input_list[i]) # tausche elemente <= pivot an stelle <= i
+    (input_list[i + 1], input_list[oben]) = (input_list[oben], input_list[i + 1]) # tausche pivot an die passende stelle hinter i
+    return i + 1
 
+def quicksort(input_list, unten, oben):
+    if unten < oben:
+        # finde pivot
+        p = partition(input_list, unten, oben)
+        # rekursiv links
+        quicksort(input_list, unten, p - 1)
+        # rekursiv rechts
+        quicksort(input_list, p + 1, oben)
 
-def restore_namelist(namelist):
-    restored_namelist = []
-    for name in namelist:
-        restored_namelist.append(name[1] + "" + name[0])
-    return restored_namelist
+if sys.argv[1] == '-merge':  # Aufruf wenn -merge als Argument mitgegeben wird
+    sorted_list = mergesort(input_list)
+    for element in sorted_list:
+        print(element)  # Rückgabe an die Konsole (das soll so oder?!)
+elif sys.argv[1] == '-quick':  # Aufruf wenn -quick als Argument mitgegeben wird
+    quicksort(input_list, 0, len(input_list) - 1) 
+    for element in input_list:
+        print(element)  # Rückgabe an die Konsole (das soll so oder?!)
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description="Sort a txt File (with first and lastnames) with Mergesort and Quicksort")
-    parser.add_argument('-quick', dest='quick', action='store_const', const=True,
-                        default=False)  # ob quicksortv
-    parser.add_argument('-debug', dest='debug', action='store_const', const=True,
-                        default=False)  # ob alle sorts
-    parser.add_argument('-merge', dest='merge', action='store_const', const=True,
-                        default=False)  # ob mergesort
-    parser.add_argument('path', type=str)  # pfad der einzulesenden datei
-    args = parser.parse_args()  # momentan nur 1 argument drin?
-
-    path = args.path
-    soll_quick = args.quick
-    soll_merge = args.merge
-    soll_debug = args.debug
-    namensliste = extract_list(path)
-
-    if soll_quick:
-        sorted_list = quicksort(namensliste)
-    elif soll_merge:
-        sorted_list = mergesort(namensliste)
-    elif soll_debug:
-        sorted_list = quicksort(namensliste)
-        sorted_merge_list = mergesort(namensliste)
-        if (sorted_list == sorted_merge_list):
-            print("True")
-        else:
-            print("False")
-    else:
-        print("use quick- or mergesort pls")
-
-    result = restore_namelist(sorted_list)
-    for name in result:
-        print(name)
+text_datei.close()
