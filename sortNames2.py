@@ -1,8 +1,7 @@
 import sys
-from time import *
 
 text_datei = open(sys.argv[len(sys.argv) - 1])
-input_list = [line.strip() for line in text_datei if not line.startswith("#") and line != " "]
+input_list = [line.strip() for line in text_datei if line != "#" and line != " "]
 
 # Funktion zum vergleich von namen im format "vorname" " " "nachname" lexikographisch
 # a <= b == True
@@ -72,8 +71,6 @@ def partition(input_list, unten, oben):
     (input_list[i + 1], input_list[oben]) = (input_list[oben], input_list[i + 1]) # tausche pivot an die passende stelle hinter i
     return i + 1
 
-
-pointer1 = process_time()
 def quicksort(input_list, unten, oben):
     if unten < oben:
         # finde pivot
@@ -82,7 +79,6 @@ def quicksort(input_list, unten, oben):
         quicksort(input_list, unten, p - 1)
         # rekursiv rechts
         quicksort(input_list, p + 1, oben)
-pointer2 = process_time()
 
 if sys.argv[1] == '-merge':  # Aufruf wenn -merge als Argument mitgegeben wird
     sorted_list = mergesort(input_list)
@@ -93,6 +89,4 @@ elif sys.argv[1] == '-quick':  # Aufruf wenn -quick als Argument mitgegeben wird
     for element in input_list:
         print(element)  # Rückgabe an die Konsole (das soll so oder?!)
 
-timeer = pointer2 - pointer1
 text_datei.close()
-print("Time: ", timeer)
