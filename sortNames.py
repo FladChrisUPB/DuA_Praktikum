@@ -12,7 +12,7 @@ def extract_list(pfad):
         for name in names:
             if name[0] != "#" and name != " ":
                 i = 0     # zähler um das leerzeichen zu finden
-                for zeichen in name:
+                for zeichen in lost:
                     if zeichen == " ":
                         vorname = name[:i]
                         j = i
