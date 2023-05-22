@@ -32,7 +32,7 @@ def comp(x, y):
 
     # Prüfe Reihenfolge nach den Vornamen
     if nachnamengleich:
-        if x[:nachnamestartx - 2] <= y[:nachnamestarty - 2]:
+        if x[:nachnamestartx - 1] <= y[:nachnamestarty - 1]:
             return True
         else:
             return False
