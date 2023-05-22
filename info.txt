@@ -1,0 +1,6 @@
+Autor: cstiewe@mail.uni-paderborn.de 7217760 Stiewe, Christian
+Autor: fladungc@mail.uni-paderborn.de 7261376 Fladung, Christian
+Autor: bjakobi@mail.uni-paderborn.de 7250497 Jakobi, Benedikt
+Autor: mk5@campus.uni-paderborn.de 7122240 Krämer, Matthias
+Compile:
+Run : python3 main.py
