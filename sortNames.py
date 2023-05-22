@@ -94,10 +94,10 @@ def quicksort(input_list, unten, oben):
 if sys.argv[1] == '-merge':  # Aufruf wenn -merge als Argument mitgegeben wird
     sorted_list = mergesort(input_list)
     for element in sorted_list:
-        print(element)  # Rückgabe an die Konsole (das soll so oder?!)
+        print(element) 
 elif sys.argv[1] == '-quick':  # Aufruf wenn -quick als Argument mitgegeben wird
     quicksort(input_list, 0, len(input_list) - 1)
     for element in input_list:
-        print(element)  # Rückgabe an die Konsole (das soll so oder?!)
+        print(element)
 
 text_datei.close()
