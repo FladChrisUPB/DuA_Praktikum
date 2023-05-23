@@ -22,7 +22,8 @@ Es müsste nur jemand eben bescheid gegeben werden, der das ganze durchwinkt.
 
 
 **Issue erstellen**\
-Geht auf [Git](https://github.com/) und erstellt ein Issue.
+Geht auf [Git](https://github.com/) und erstellt ein Issue. Es liegen dort templates vor. Sucht euch einen passenden heraus oder verwendet das Blanko.
+Es muss nicht immer alles ausgefüllt werden und ihr könnt die templates auch euren bedarf nach Anpassen.
 Klicke auf "Neues Issue erstellen", Fülle die Details des Issues aus: Gib dem Issue einen Titel und eine Beschreibung. Wenn du fertig bist, klicke auf "Submit new issue". Gebt dem ganzen noch ein Label (rechts zu finden) um das Problem leichter erkennbar zu machen.
 Weißt einen Verantwortlichen zu (meist ihr selbst oder jemand, der euch helfen soll).
 
