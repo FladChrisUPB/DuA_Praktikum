@@ -1,6 +1,6 @@
-**INFO**\
-name.txt kann ein Output in einer txt datei gespeichert werden um das besser lesen zu können.
-bsp. output.txt
+**Nice to know**\
+Mit '>> dateiname.txt' kann ein Output in einer txt datei gespeichert werden um das besser lesen zu können.
+bsp.: '>> output.txt'
 
 
 **main**\
