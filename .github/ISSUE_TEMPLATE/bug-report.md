@@ -2,7 +2,7 @@
 name: Bug Report
 about: Bug report erstellen mit Beschreibung des Problems
 title: ''
-labels: ''
+labels: bug
 assignees: ''
 
 ---
