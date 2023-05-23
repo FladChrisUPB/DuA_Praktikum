@@ -39,7 +39,10 @@ Geht nach dem Push auf [Git](https://github.com/) und wählt das passende Rep.
 Auf der Repository-Seite solltest du eine Option finden, um einen Merge Request (oder Pull Request) zu erstellen. Klicke darauf, um den Merge Request zu erstellen.
 Am besten wählt ihr rechts oben noch einen Reviewer aus, der das ganze durchgeht und bestätigt.
 
-**Aufgabe 1: Sortieren (100 Punkte)**
+
+
+
+**Aufgabe 1: Sortieren (100 Punkte)**\\
 Implementieren Sie die beiden Sortierverfahren Mergesort und Quicksort fur das folgende ¨
 Szenario:
 In einer Tabelle ist eine (unsortierte) Liste von Namen (Vorname Nachname) gegeben. Vorname und Nachname sind jeweils Texte aus {a, ..., z}.
