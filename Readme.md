@@ -16,9 +16,11 @@ Hier werden die Datensätze mit hochgeladen, welche für unsere Aufgabe verwende
 Der test_branch ist für testversionen gedacht. Es können hier neue Datein angelegt werden oder sonstiges.
 
 
-**test_code.py**\
-Die *test_code.py* ist eine Datei die zum testen benutzt wird. Sie ist nicht relevant für die Aufgabe und darf direkt gemerget werden OHNE kontrolle.
-Es müsste nur jemand eben bescheid gegeben werden, der das ganze durchwinkt.
+**test_codes**\
+In diesem Ordner könnt ihr einfach neue testcodes anlegen, welche nicht aktiv zu der Lösung beitragen und einfach nur der Dokumentation oder dem vorzeigen dienen sollen.
+Benennung:
+Name des Testcodes + _ + IMTname des Erstellers + _ + Zugehörigkeit welcher Aufgabe.py
+bsp.: testcode_1_fladungc_Aufgabe1.py
 
 
 **Issue erstellen**\
